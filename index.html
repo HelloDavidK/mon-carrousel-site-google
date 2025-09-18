@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrousel Responsive</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .carousel-container {
+            width: 90%;
+            max-width: 1000px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .carousel-slide {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .carousel-slide {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Version PC : image à gauche, texte à droite */
+        @media (min-width: 768px) {
+            .carousel-slide {
+                flex-direction: row;
+            }
+
+            .image-box {
+                flex: 1;
+                padding: 20px;
+            }
+
+            .image-box img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+                display: block;
+            }
+
+            .text-box {
+                flex: 1;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+
+        /* Version Mobile : image au-dessus, texte en dessous */
+        @media (max-width: 767px) {
+            .carousel-slide {
+                flex-direction: column;
+            }
+
+            .image-box, .text-box {
+                width: 100%;
+                padding: 20px;
+            }
+
+            .image-box img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="carousel-container">
+        <div class="carousel-slide active">
+            <div class="image-box">
+                <img src="https://via.placeholder.com/600x400/FF5733/FFFFFF?text=Image+1" alt="Image 1">
+            </div>
+            <div class="text-box">
+                <h2>Titre de la Diapositive 1</h2>
+                <p>Ceci est le texte correspondant à la première image. Il s'adapte parfaitement sur tous les appareils.</p>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <div class="image-box">
+                <img src="https://via.placeholder.com/600x400/33FF57/000000?text=Image+2" alt="Image 2">
+            </div>
+            <div class="text-box">
+                <h2>Titre de la Diapositive 2</h2>
+                <p>Le contenu de ce carrousel change automatiquement toutes les 5 secondes pour une expérience fluide.</p>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <div class="image-box">
+                <img src="https://via.placeholder.com/600x400/5733FF/FFFFFF?text=Image+3" alt="Image 3">
+            </div>
+            <div class="text-box">
+                <h2>Titre de la Diapositive 3</h2>
+                <p>Un design optimisé qui place l'image à gauche et le texte à droite sur les grands écrans, et les empile sur les mobiles.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+            const slideInterval = 5000; // 5 secondes
+
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+
+            setInterval(nextSlide, slideInterval);
+        });
+    </script>
+
+</body>
+</html>
